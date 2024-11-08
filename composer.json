@@ -1,0 +1,15 @@
+{
+    "name": "leanatan/trabalhop2",
+    "description": "trabalho de desenvolvimento web p2",
+    "autoload": {
+        "psr-4": {
+            "Leanatan\\Trabalhop2\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Leanatan Raul Resende Crespo"
+        }
+    ],
+    "require": {}
+}
