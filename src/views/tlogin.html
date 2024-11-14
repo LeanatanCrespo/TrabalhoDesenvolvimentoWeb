@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <section>
+
+        <div class="titulo">
+            <h2>Faça seu Login</h2>
+        </div>
+
+        <form id="loginForm">
+            <label for="login">Login:</label>
+            <input type="text" id="login" name="login" required>
+
+            <label for="senha">Senha:</label>
+            <input type="password" id="senha" name="senha" required>
+        </form>
+
+        <div>
+            <button type="submit">Logar</button>
+            <button type="submit">Cadastre-se</button>
+        </div>
+
+    </section>
+
+    <script>
+        $(document).ready(function() {
+            // Função para realizar o login
+            $('#loginForm').submit(function(event) {
+                event.preventDefault();
+                var login = $('#login').val();
+                var senha = $('#senha').val();
+
+                $.ajax({
+                    url: '../controllers/funcionarioController.php',
+                    method: 'POST',
+                    data: {
+                        acao: 'login',
+                        login: login,
+                        senha: senha
+                    },
+                    success: function(response) {
+                        try {
+                            var data = JSON.parse(response);
+                            if (data.success) {
+                                // Salva as informações do funcionário no localStorage
+                                localStorage.setItem('loggedIn', true);
+                                localStorage.setItem('funcionarioId', data.funcionario.id);
+                                window.location.href = 'index.html'; // Redireciona para a página principal
+                            } else {
+                                alert(data.message);
+                            }
+                        } catch (e) {
+                            alert("Erro na resposta do servidor.");
+                        }
+                    },
+                    error: function() {
+                        alert("Erro na comunicação com o servidor.");
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
