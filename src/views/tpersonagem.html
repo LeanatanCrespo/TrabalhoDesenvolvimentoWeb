@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="CSS/tpersonagem.css">
+</head>
+<body>
+    <div class="a">
+        <div class="fotpersonagem">
+            <img src="" alt="foto" id="foto">
+        </div>
+    
+        <div class="statuspersonagem">
+            <label for="nome">Nome:</label>
+            <input type="text" id="nome">
+        </div>
+
+        <div class="statuspersonagem">
+            <label for="raca">Raça:</label>
+            <input type="text" id="raca">
+        </div>
+    
+        <div class="statuspersonagem">
+            <label for="classe">Classe:</label>
+            <input type="text" id="classe">
+        </div>
+    
+        <div class="botoes">
+            <button class="salvar" onclick="savePerson()">Salvar</button>
+            <button class="cancelar" onclick="cancelEdit()">Cancelar</button>
+        </div>
+    
+        <button class="deletar" onclick="confirmDelete()">Deletar Personagem</button>
+    </div>
+    
+    <div class="confirma" id="confirma">
+        <div class="popup">
+            <p>Tem certeza que deseja deletar o personagem?</p>
+            <div class="botoes">
+                <button onclick="deletePerson()">Sim</button>
+                <button onclick="closePopup()">Não</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function savePerson() {
+            const nome = document.getElementById('nome').value;
+            const raca = document.getElementById('raca').value;
+            const classe = document.getElementById('classe').value;
+            alert(`Personagem atualizado:\nNome: ${nome} \nraca: ${raca} \nClasse: ${classe}`);
+            
+        }
+
+        
+        function cancelEdit() {
+            window.history.back();
+        }
+
+        
+        function confirmDelete() {
+            document.getElementById('confirma').style.display = 'flex';
+        }
+
+        
+        function closePopup() {
+            document.getElementById('confirma').style.display = 'none';
+        }
+
+        
+        function deletePerson() {
+            alert('Personagem deletado com sucesso!');
+            window.location.href = 'tinicial.html';
+        }
+    </script>
+</body>
+</html>

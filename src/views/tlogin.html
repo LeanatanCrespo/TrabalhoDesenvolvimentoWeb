@@ -4,15 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="CSS/tlogin.css">
 </head>
 <body>
-    <section>
-
+    <div class="a">
         <div class="titulo">
             <h2>Faça seu Login</h2>
         </div>
 
-        <form id="loginForm">
+        <form id="loginusuario">
             <label for="login">Login:</label>
             <input type="text" id="login" name="login" required>
 
@@ -20,23 +20,22 @@
             <input type="password" id="senha" name="senha" required>
         </form>
 
-        <div>
-            <button type="submit">Logar</button>
-            <button type="submit">Cadastre-se</button>
+        <div class="botoes">
+            <button class="button" onclick="window.location.href='tinicial.html'">Logar</button>
+            <button class="button" onclick="window.location.href='tcadastro.html'">Cadastrar</button>
         </div>
-
-    </section>
+    </div>
 
     <script>
         $(document).ready(function() {
-            // Função para realizar o login
-            $('#loginForm').submit(function(event) {
+            
+            $('#loginususario').submit(function(event) {
                 event.preventDefault();
                 var login = $('#login').val();
                 var senha = $('#senha').val();
 
                 $.ajax({
-                    url: '../controllers/funcionarioController.php',
+                    url: '../controllers/usuarioController.php',
                     method: 'POST',
                     data: {
                         acao: 'login',
@@ -47,10 +46,10 @@
                         try {
                             var data = JSON.parse(response);
                             if (data.success) {
-                                // Salva as informações do funcionário no localStorage
+                                
                                 localStorage.setItem('loggedIn', true);
-                                localStorage.setItem('funcionarioId', data.funcionario.id);
-                                window.location.href = 'index.html'; // Redireciona para a página principal
+                                localStorage.setItem('usuarioId', data.usuario.id);
+                                window.location.href = 'index.html';
                             } else {
                                 alert(data.message);
                             }

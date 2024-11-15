@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciar Usuário</title>
+    <link rel="stylesheet" href="CSS/tusuario.css">
+</head>
+<body>
+
+<div class="a">
+    <div class="fotousuario">
+        <img src="" alt="foto" id="foto">
+    </div>
+
+    <div class="loginusuario">
+        <label for="login">Login:</label>
+        <input type="text" id="login" value="">
+    </div>
+
+    <div class="loginusuario">
+        <label for="password">Senha:</label>
+        <input type="password" id="password" value="">
+    </div>
+
+    <div class="botoes">
+        <button class="salvar" onclick="saveUser()">Salvar</button>
+        <button class="cancelar" onclick="cancelEdit()">Cancelar</button>
+    </div>
+
+    <button class="deletar" onclick="confirmDelete()">Deletar Usuário</button>
+</div>
+
+<div class="confirma" id="confirma">
+    <div class="popup">
+        <p>Tem certeza que deseja deletar o usuário?</p>
+        <div class="botoes">
+            <button onclick="deleteUser()">Sim</button>
+            <button onclick="closePopup()">Não</button>
+        </div>
+    </div>
+</div>
+
+<script>
+        // Função para criar um novo registro
+    async function criarRegistro(dados) {
+    try {
+        const response = await fetch('/api/registros', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(dados)
+        });
+        const novoRegistro = await response.json();
+        // Adiciona o novo registro à lista
+        adicionarRegistro(novoRegistro);
+    } catch (error) {
+        console.error('Erro ao criar registro:', error);
+    }
+    }
+
+    function saveUser() {
+        const login = document.getElementById('login').value;
+        const password = document.getElementById('password').value;
+        alert(`Usuário atualizado:\nLogin: ${login}\nSenha: ${password}`);
+        
+    }
+
+    
+    function cancelEdit() {
+        window.history.back();
+    }
+
+    
+    function confirmDelete() {
+        document.getElementById('confirma').style.display = 'flex';
+    }
+
+    
+    function closePopup() {
+        document.getElementById('confirma').style.display = 'none';
+    }
+
+    
+    function deleteUser() {
+        alert('Usuário deletado com sucesso!');
+        window.location.href = 'login.html';
+    }
+</script>
+
+</body>
+</html>

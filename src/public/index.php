@@ -12,6 +12,7 @@ $router->add('PUT', '/usuarios/{id}', [$controller, 'update']);
 $router->add('DELETE', '/usuarios/{id}', [$controller, 'delete']);
 
 $router->add('POST', '/personagens', [$controller, 'create']);
+$router->add('GET', '/personagens', [$controller, 'list']);
 $router->add('GET', '/personagens/{id}', [$controller, 'getById']);
 $router->add('PUT', '/personagens/{id}', [$controller, 'update']);
 $router->add('DELETE', '/personagens/{id}', [$controller, 'delete']);
