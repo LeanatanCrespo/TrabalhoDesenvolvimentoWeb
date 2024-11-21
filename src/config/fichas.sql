@@ -1,0 +1,19 @@
+CREATE DATABASE ;
+
+USE fichaRPG;
+
+CREATE TABLE usuarios (
+    id SERIAL PRIMARY KEY,
+    login VARCHAR(50) NOT NULL,
+    senha VARCHAR(20) NOT NULL,
+    email VARCHAR(100) NOT NULL UNIQUE
+);
+
+CREATE TABLE personagens (
+    id SERIAL PRIMARY KEY,
+    nome VARCHAR(30) NOT NULL,
+    raca VARCHAR(20) NOT NULL,
+    classe VARCHAR(20) NOT NULL,
+    usuarioId INT NOT NULL,
+    CONSTRAINT fk_usuario FOREIGN KEY (usuarioId) REFERENCES usuarios (id) ON DELETE CASCADE
+);

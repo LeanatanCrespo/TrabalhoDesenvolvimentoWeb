@@ -1,5 +1,10 @@
 <?php
 
+namespace leanatan\trabalhop2\models;
+require_once __DIR__ . '/../config/db.php';  
+
+use PDO;
+
 class usuario{
     private $conn;
 

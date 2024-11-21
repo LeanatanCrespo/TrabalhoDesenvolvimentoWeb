@@ -60,31 +60,37 @@ button:hover {
     padding: 20px;
 }
 
-.person-list {
-    background-color: #ffffff;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin-top: 30px;
+    border-radius: 12px;
+    overflow: hidden;  
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);  
 }
 
-.person-item {
-    display: flex;
-    align-items: center;
-    padding: 10px 0;
-    border-bottom: 1px solid #ddd;
+th, td {
+    padding: 18px;
+    text-align: left;
+    border-bottom: 2px solid #e91e63;  
 }
 
-.person-item:last-child {
-    border-bottom: none;
+th {
+    background-color: #f06292;  
+    color: #fff;
+    font-size: 16px;
+    text-transform: uppercase;  
 }
 
-.person-item img {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    margin-right: 15px;
+/* Linhas Alternadas */
+tr:nth-child(even) td {
+    background-color: #f8bbd0; 
 }
 
-.person-nome {
-    font-weight: bold;
+/* Efeito de Hover nas Linhas */
+tr:hover td {
+    background-color: #f48fb1;  
+    transform: translateY(-2px);  
+    transition: background-color 0.3s ease, transform 0.3s ease;
 }

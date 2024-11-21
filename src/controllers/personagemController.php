@@ -1,20 +1,37 @@
 <?php
 
+namespace leanatan\trabalhop2\controllers;
+
+use leanatan\trabalhop2\models\personagem;
+use leanatan\trabalhop2\config\db;
+use PDO;
+
+require_once __DIR__ . '/../models/fpersonagem.php';
+
 class personagemController
 {
     private $personagem;
 
-    public function __construct($db)
+    private static $INSTANCE;
+
+    public static function getInstance(){
+        if(!isset(self::$INSTANCE)){
+            self::$INSTANCE = new personagemController();
+        }
+        return self::$INSTANCE;
+    }
+
+    public function __construct()
     {
-        $this->personagem = new personagem($db);
+        $this->personagem = new Personagem(db::getInstance());
     }
 
     public function create()
     {
         $data = json_decode(file_get_contents("php://input"));
-        if (isset($data->nome) && isset($data->raca) && isset($data->classe)) {
+        if (isset($data->nome) && isset($data->raca) && isset($data->classe) && isset($data->usuarioId)) {
             try {
-                $this->personagem->create($data->nome, $data->raca, $data->classe);
+                $this->personagem->create($data->nome, $data->raca, $data->classe, $data->usuarioId);
 
                 http_response_code(201);
                 echo json_encode(["message" => "Personagem criado com sucesso."]);
@@ -28,11 +45,11 @@ class personagemController
         }
     }
 
-    public function getById($id)
+    public function getByUsuario($usuarioId)
     {
-        if (isset($id)) {
+        if (isset($usuarioId)) {
             try {
-                $personagem = $this->personagem->getById($id);
+                $personagem = $this->personagem->getByUsuario($usuarioId);
                 if ($personagem) {
                     echo json_encode($personagem);
                 } else {
@@ -60,7 +77,7 @@ class personagemController
         $data = json_decode(file_get_contents("php://input"));
         if (isset($data->id) && isset($data->nome) && isset($data->raca) && isset($data->classe)) {
             try {
-                $count = $this->personagem->update($data->id, $data->nome, $data->raca, $data->classe);
+                $count = $this->personagem->update($data->id, $data->nome, $data->raca, $data->classe, $data->usuarioId);
                 if ($count > 0) {
                     http_response_code(200);
                     echo json_encode(["message" => "Personagem atualizado com sucesso."]);

@@ -1,21 +1,37 @@
 <?php
-$servername = "TrabalhoDW";
-$username = "postgres";
-$password = "unigran";
-$database = "postgres";
 
-$conn = new mysqli($servername, $username, $password, $database);
+namespace leanatan\trabalhop2\config;
 
-if ($conn->connect_error) {
-  die("Falha na conexão: " . $conn->connect_error);
+use PDO;
+use PDOException;
+
+class db {
+
+    static $host = 'localhost';
+    static $dbname = 'fichaRPG';
+    static $user = 'postgres';
+    static $password = 'lrrc-1907';
+
+    private static $instance;
+
+    public static function getInstance() {
+        if (!isset(self::$instance)) {
+          $host = 'localhost';
+          $dbname = 'fichaRPG';
+          $user = 'postgres';
+          $password = 'lrrc-1907';
+
+            try {
+                self::$instance = new PDO("pgsql:host=$host;port=5432;dbname=$dbname;charset=utf8", $user, $password,[PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION]);
+                echo "conexão feita";
+            } catch (PDOException $e) {
+                echo "Erro na conexão: " . $e->getMessage();
+            }
+        }
+
+        return self::$instance;
+    }
+
+
 }
-
-/*
-try {
-    $pdo = new PDO("mysql:host=$host;dbname=$db", $user, $pass);
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-} catch (PDOException $e) {
-    echo "Erro: " . $e->getMessage();
-}
-*/
 ?>

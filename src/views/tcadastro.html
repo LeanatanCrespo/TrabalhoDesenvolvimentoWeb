@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro de Usuário</title>
     <link rel="stylesheet" href="CSS/tcadastro.css">
+    <script src="Js/script.js" defer></script>
 </head>
 <body>
 
@@ -26,62 +27,10 @@
     </div>
 
     <div class="botoes">
-        <button class="salvar" onclick="createUser()">Salvar</button>
+        <button class="salvar" onclick="registrausuario()">Salvar</button>
         <button class="voltar" onclick="goBack()">Voltar</button>
     </div>
 </div>
-
-<script>
-    
-    function goBack() {
-        window.history.back();
-    }
-
-    
-    function getUsers() {
-        const users = localStorage.getItem('users');
-        return users ? JSON.parse(users) : [];
-    }
-
-    
-    function saveUser(user) {
-        const users = getUsers();
-        users.push(user);
-        localStorage.setItem('users', JSON.stringify(users));
-    }
-
-    
-    function createUser() {
-        const login = document.getElementById('login').value.trim();
-        const password = document.getElementById('password').value.trim();
-        const messageDiv = document.getElementById('message');
-
-        if (!login || !password) {
-            messageDiv.textContent = 'Por favor, preencha todos os campos.';
-            messageDiv.className = 'error-message';
-            return;
-        }
-
-        const users = getUsers();
-
-        
-        const userExists = users.some(user => user.login === login);
-
-        if (userExists) {
-            messageDiv.textContent = 'Login já existe. Escolha outro login.';
-            messageDiv.className = 'error-message';
-        } else {
-            
-            saveUser({ login, password });
-            messageDiv.textContent = 'Usuário cadastrado com sucesso!';
-            messageDiv.className = 'success-message';
-
-            
-            document.getElementById('login').value = '';
-            document.getElementById('password').value = '';
-        }
-    }
-</script>
 
 </body>
 </html>

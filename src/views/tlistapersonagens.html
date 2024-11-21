@@ -5,65 +5,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="CSS/tlistapersonagem.css">
+    <script src="Js/personagem.js" defer></script>
 </head>
 <body>
     </head>
     <body>
-        <nav class="a">
+        <div class="a">
             <div class="Gcadastro" onclick="window.location.href='tusuario.html'">
                 <img src="" alt="FotoUsuario">
                 <span>Usuário</span>
             </div>
             <div class="botoesprincipal">
-                <button onclick="goBack()">Voltar</button>
-                <button onclick="createPerson()">Criar Novo Personagem</button>
-            </div>
-        </nav>
-    
-        <div class="lista">
-            <div class="person-list" id="personList">
-
+                <button class="button" onclick="window.location.href='tinicial.html'">voltar</button>
+                <button class="button" onclick="window.location.href='cadastroPersonagem.html'">Criar personagem</button>
             </div>
         </div>
-    
-        <script>
 
-            const persons = [
-                { nome: 'personagem1', foto: '' },
-                { nome: 'personagem2', foto: '' },
-                { nome: 'personagem3', foto: '' },
-            ];
-    
-
-            function renderPersonList() {
-                const personList = document.getElementById('personList');
-                personList.innerHTML = '';
-                persons.forEach(person => {
-                    const personItem = document.createElement('div');
-                    personItem.className = 'person-item';
-                    personItem.innerHTML = `
-                        <img src="${person.foto}" alt="Foto de ${person.nome}">
-                        <span class="person-nome">${person.nome}</span>
-                    `;
-                    personList.appendChild(personItem);
-                });
-            }
-    
-            function initialize() {
-                const currentperson = getCurrentperson();
-                document.getElementById('currentperson').textContent = currentperson.nome;
-                renderpersonList();
-            }
-
-            function goBack() {
-                window.history.back();
-            }
-    
-            function createPerson() {
-                window.location.href = 'tpersonagem.html';
-            }
-    
-            initialize();
-        </script>
+        <main>
+            <section class="lista">
+                <h2>Lista de Personagens</h2>
+                <table id="personagemTable">
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>Raca</th>
+                            <th>Classe</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Linhas de dados serão carregadas dinamicamente -->
+                    </tbody>
+                </table>
+            </section>
+        </main>
 </body>
 </html>
